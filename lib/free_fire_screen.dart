@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'free_fire_br_screen.dart';
 
 class FreeFireScreen extends StatefulWidget {
   const FreeFireScreen({super.key});
@@ -190,14 +191,24 @@ class _FreeFireScreenState extends State<FreeFireScreen> {
                         ),
                         child: Column(
                           children: [
-                            _buildGameModeCard(
-                              context,
-                              "BATTLE ROYALE (BR)",
-                              "The classic survival experience. 50 players, 1 champion.",
-                              "https://lh3.googleusercontent.com/aida-public/AB6AXuBXsYiKExAVVGl6TOz4dYdlAjb8g8SuqPf8NCs2x_IYdN7P45qfjM-LhhETXbfPEJAgnJGxk0mSwYGhp0HIxQzsiSNT41W9x0xQ-tpmg3vApMFJgyfboEBZY3plhx3_S1aRLeYgApGfbG7jEMOtRXXDssAfqNhR7Amcfh7K9zYhqkObGhEiWyHBLcIa_UxKZYSZaYxk2hCgBNkd9WBX5rHEjpHEQMBq94onC1uApTjwx2-oKLvxCc1tRJHcGoJ6ze9gBTNE7MPu1jn8",
-                              "RECOMMENDED",
-                              primaryColor,
-                              true,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const FreeFireBRScreen(),
+                                  ),
+                                );
+                              },
+                              child: _buildGameModeCard(
+                                context,
+                                "BATTLE ROYALE (BR)",
+                                "The classic survival experience. 50 players, 1 champion.",
+                                "https://lh3.googleusercontent.com/aida-public/AB6AXuBXsYiKExAVVGl6TOz4dYdlAjb8g8SuqPf8NCs2x_IYdN7P45qfjM-LhhETXbfPEJAgnJGxk0mSwYGhp0HIxQzsiSNT41W9x0xQ-tpmg3vApMFJgyfboEBZY3plhx3_S1aRLeYgApGfbG7jEMOtRXXDssAfqNhR7Amcfh7K9zYhqkObGhEiWyHBLcIa_UxKZYSZaYxk2hCgBNkd9WBX5rHEjpHEQMBq94onC1uApTjwx2-oKLvxCc1tRJHcGoJ6ze9gBTNE7MPu1jn8",
+                                "RECOMMENDED",
+                                primaryColor,
+                                true,
+                              ),
                             ),
                             const SizedBox(height: 20),
                             _buildGameModeCard(
@@ -327,27 +338,25 @@ class _FreeFireScreenState extends State<FreeFireScreen> {
   ) {
     final primaryColor = const Color(0xFFf20d0d);
 
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        height: 200,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.5),
-              blurRadius: 16,
-            ),
-          ],
-          border: Border.all(
-            color: Colors.white.withOpacity(0.1),
+    return Container(
+      height: 200,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            blurRadius: 16,
           ),
-          image: DecorationImage(
-            image: NetworkImage(imageUrl),
-            fit: BoxFit.cover,
-          ),
+        ],
+        border: Border.all(
+          color: Colors.white.withOpacity(0.1),
         ),
-        child: Stack(
+        image: DecorationImage(
+          image: NetworkImage(imageUrl),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Stack(
           children: [
             // Glass Overlay Gradient
             Container(
@@ -450,8 +459,7 @@ class _FreeFireScreenState extends State<FreeFireScreen> {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 
   Widget _buildNavItem(

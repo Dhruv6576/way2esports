@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final FirebaseAuthService _authService = FirebaseAuthService();
+  int selectedNavIndex = 0;
 
   Future<void> _signOut() async {
     try {
@@ -414,12 +415,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
-                  padding: const EdgeInsets.only(top: 12, bottom: 24),
+                  padding: const EdgeInsets.fromLTRB(8, 12, 8, 32),
                   decoration: BoxDecoration(
-                    color: backgroundColor.withOpacity(0.9),
+                    color: backgroundColor.withOpacity(0.95),
                     border: Border(
                       top: BorderSide(
-                        color: Colors.grey.withOpacity(0.1),
+                        color: Colors.white.withOpacity(0.05),
                         width: 1,
                       ),
                     ),
@@ -428,28 +429,49 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _buildNavItem(
-                        Icons.home_filled,
                         "Home",
-                        true,
+                        Icons.home,
+                        selectedNavIndex == 0,
                         primaryColor,
+                        () {
+                          setState(() => selectedNavIndex = 0);
+                        },
                       ),
                       _buildNavItem(
-                        Icons.sports_esports,
-                        "Tournaments",
-                        false,
+                        "Participated",
+                        Icons.assignment_turned_in,
+                        selectedNavIndex == 1,
                         primaryColor,
+                        () {
+                          setState(() => selectedNavIndex = 1);
+                        },
                       ),
                       _buildNavItem(
-                        Icons.history,
-                        "History",
-                        false,
+                        "Wallet",
+                        Icons.payments,
+                        selectedNavIndex == 2,
                         primaryColor,
+                        () {
+                          setState(() => selectedNavIndex = 2);
+                        },
                       ),
                       _buildNavItem(
-                        Icons.person,
-                        "Profile",
-                        false,
+                        "Refer",
+                        Icons.share,
+                        selectedNavIndex == 3,
                         primaryColor,
+                        () {
+                          setState(() => selectedNavIndex = 3);
+                        },
+                      ),
+                      _buildNavItem(
+                        "Leaderboard",
+                        Icons.leaderboard,
+                        selectedNavIndex == 4,
+                        primaryColor,
+                        () {
+                          setState(() => selectedNavIndex = 4);
+                        },
                       ),
                     ],
                   ),
@@ -528,30 +550,34 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildNavItem(
-    IconData icon,
     String label,
+    IconData icon,
     bool isActive,
     Color primary,
+    VoidCallback onTap,
   ) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          icon,
-          color: isActive ? primary : Colors.white.withOpacity(0.4),
-          size: 24,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: GoogleFonts.orbitron(
-            color: isActive ? primary : Colors.white.withOpacity(0.4),
-            fontSize: 10,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 0.5,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isActive ? primary : Colors.white.withOpacity(0.5),
+            size: 24,
           ),
-        ),
-      ],
+          const SizedBox(height: 6),
+          Text(
+            label,
+            style: GoogleFonts.orbitron(
+              fontSize: 8,
+              fontWeight: FontWeight.bold,
+              color: isActive ? primary : Colors.white.withOpacity(0.5),
+              letterSpacing: 1,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
