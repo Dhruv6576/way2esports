@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'tournament_details_screen.dart';
 
 class FreeFireBRScreen extends StatefulWidget {
   const FreeFireBRScreen({super.key});
@@ -409,7 +410,27 @@ class _FreeFireBRScreenState extends State<FreeFireBRScreen> {
     final backgroundColor = const Color(0xFF120808);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TournamentDetailsScreen(
+              title: title,
+              location: location,
+              date: date,
+              time: time,
+              entryFee: entryFee,
+              prizePool: prizePool,
+              perKill: perKill,
+              version: version,
+              imageUrl: imageUrl,
+              badge: badge,
+              filledSlots: filledSlots,
+              totalSlots: totalSlots,
+            ),
+          ),
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
